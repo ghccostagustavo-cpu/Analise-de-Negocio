@@ -3,4 +3,5 @@ historico.csv
 __pycache__/
 *.pyc
 .env
- 
+*.json
+projeto-meliuz-growth-b37259aeae08.json
