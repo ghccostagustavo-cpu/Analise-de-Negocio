@@ -1,4 +1,4 @@
-# Análise de Testes A/B — Méliuz
+# Análise de Testes de Mercado
 
 Ferramenta para análise automatizada de testes A/B de cashback, com interface Streamlit e IA local via Ollama.
 
