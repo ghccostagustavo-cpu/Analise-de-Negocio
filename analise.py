@@ -1,10 +1,13 @@
 import os
-import datetime
+from datetime import datetime
+from dotenv import load_dotenv
 import pandas as pd
 import streamlit as st
 import requests
 import gspread
 from google.oauth2.service_account import Credentials
+
+load_dotenv()
 
 #Importação das bibliotecas necessárias. Importamos pandas para manusearmos os CSV's, Streamlit para termos uma interface interatica (sem ser terminal)
 #O requests é pra operarmos com a IA local. A comunicação é na própria máquina, a IA local é para mantermos os dados dentro da empresa, não enviando pra modelos da Internet
@@ -29,7 +32,7 @@ def consultar_ia(prompt, dados):
         #Para mexer com números, 0.1 é bom.
         "messages": [
             {"role": "system", "content":
-                "Você é analista de growth do Méliuz. "
+                "Você é analista de growth."
                 "Métrica principal: receita_liquida = comissão - cashback. "
                 "Seja direto: diga o grupo vencedor e justifique em um texto analítico de até 5 linhas. "
                 f"Dados:\n{dados}"},
@@ -43,9 +46,9 @@ def consultar_ia(prompt, dados):
 
 def salvar_sheets(linha_dict):
     #Função para salvar o resultado no Google Sheets. Requer credentials.json e ID da planilha configurados
-    creds = Credentials.from_service_account_file("projeto-meliuz-growth-b37259aeae08.json", scopes=escopos)
+    creds = Credentials.from_service_account_file(os.getenv("json_config"), scopes=escopos)
     gc = gspread.authorize(creds)
-    sheet = gc.open_by_key("1rDCJiXXRv0xcbC0kILYz4oPArqU_O3TR3onn1k9W-YA").sheet1
+    sheet = gc.open_by_key(os.getenv("chave_sheets")).sheet1
     #ID da planilha é a parte da URL entre /d/ e /edit
     sheet.append_row(list(linha_dict.values()))
     #Appenda uma nova linha com os valores do dicionário
@@ -112,7 +115,7 @@ if arquivo:
         linha = {
             #Cada linha abaixo é uma coluna no Sheets
             #Estrutura exigida pelo case: nome do teste, descrição, resultado e decisão tomada
-            "data": datetime.datetime.now().strftime("%d-%m-%Y %H:%M"),
+            "data": datetime.now().strftime("%d-%m-%Y %H:%M"),
             #Isso aqui funciona como um Log pra registrar data e hora
             "teste": parceiro,
             #Aqui a linha com o teste, o parceiro

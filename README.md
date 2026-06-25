@@ -34,7 +34,7 @@ A função `salvar_sheets()` já está estruturada no código. Para ativar:
 
 1. Criar projeto no [Google Cloud Console](https://console.cloud.google.com)
 2. Ativar a API do Google Sheets
-3. Criar uma Service Account e baixar o `credentials.json` na raiz do projeto
+3. Criar uma Service Account e baixar o as credenciais em json na raiz do projeto
 4. Compartilhar a planilha com o email da Service Account
 5. Substituir `"ID_DA_SUA_PLANILHA"` no código pelo ID real
 
