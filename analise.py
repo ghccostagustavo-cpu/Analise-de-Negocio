@@ -12,7 +12,7 @@ load_dotenv()
 #Importação das bibliotecas necessárias. Importamos pandas para manusearmos os CSV's, Streamlit para termos uma interface interatica (sem ser terminal)
 #O requests é pra operarmos com a IA local. A comunicação é na própria máquina, a IA local é para mantermos os dados dentro da empresa, não enviando pra modelos da Internet
 #A biblioteca gspread e google.oauth2 são para a integração com o Google Sheets, onde vamos salvar o histórico de análises. 
-#^Requer configuração prévia de credenciais e ID da planilha. Gspread escreve e google.oauth2.service_account é a parte de autenticação
+#Gspread acessa a planilha e google.oauth2.service_account é a parte de autenticação
 
 escopos = [
     "https://www.googleapis.com/auth/spreadsheets",
