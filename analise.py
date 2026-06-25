@@ -53,7 +53,7 @@ def salvar_sheets(linha_dict):
     sheet.append_row(list(linha_dict.values()))
     #Appenda uma nova linha com os valores do dicionário
 
-st.title("Análise de Testes A/B — Méliuz")
+st.title("Análise de Testes A/B")
 #Título da interface Streamlit
 
 def limpar(valor):
